@@ -1,5 +1,5 @@
+import Footer from "../components/Footer";
 import Products from "./Products";
-
 
 export default function Home() {
     return (
@@ -11,10 +11,15 @@ export default function Home() {
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
-                    boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.5)', 
+                    boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.5)',
                 }}
             >
-                <div className="space-y-16 mb-20">
+                <div
+                    className="space-y-16 mb-20"
+                    data-aos='fade-left'
+                    data-aos-delay='200'
+                    data-aos-duration='500'
+                >
                     <h1 className="text-white text-3xl font-bold lg:text-[50px] lg:w-2/3 mx-auto">
                         ¡Siente el rugido, vive la pasión de las motos!
                     </h1>
@@ -23,7 +28,9 @@ export default function Home() {
                         <button
                             className="animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90"
                         >
-                            <a href="/">Explora la nueva colección</a>
+                            <a href="/products">
+                                <p>Explora la nueva colección</p>
+                            </a>
                         </button>
                     </div>
                 </div>
@@ -32,7 +39,34 @@ export default function Home() {
             </div>
 
             <Products />
+
+            <div 
+                className="flex justify-center items-center mt-20"
+                data-aos='flip-left'
+                data-aos-delay='200'
+                data-aos-duration='500'
+            >
+                <div className="relative rounded-lg overflow-hidden w-full m-2 lg:max-w-[70%] max-h-96">
+                    <img
+                        src='https://azwecdnepstoragewebsiteuploads.azureedge.net/PHO_STAGE_KTM-250-SX-Adamo-Edition-Stage_%23SALL_%23AEPI_%23V1.png'
+                        alt="motorcycle"
+                        className="w-full h-auto object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div className="text-center p-4 md:p-6">
+                            <h1 className="text-white text-xl md:text-3xl font-bold mb-2">
+                                Paquete básico de inicio
+                            </h1>
+                            <p className="text-white text-sm md:text-lg font-bold">
+                                Ha llegado el momento de ser genial. La gente de este mundo rechaza a las personas por ser geniales.
+                                <span className="text-primary font-bold"> Por destacar.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
+            <Footer />
         </>
     );
 }

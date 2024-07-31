@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 
 const ProductCard = ({ image, slug, link, modelo }) => (
     <div className="relative overflow-hidden rounded-lg group h-100vh">
@@ -13,5 +13,11 @@ const ProductCard = ({ image, slug, link, modelo }) => (
     </div>
 );
 
-export default ProductCard;
+ProductCard.propTypes = {
+    image: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    modelo: PropTypes.string.isRequired,
+};
 
+export default ProductCard;

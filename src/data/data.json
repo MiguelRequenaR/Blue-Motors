@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "image": "https://cdn.shopify.com/s/files/1/0608/7819/2888/files/ducati-panigale-2023.jpg?v=1674124748",
+        "modelo": "HONDA",
+        "slug": "ducati"
+    },
+    {
+        "id": 2,
+        "image": "https://cdn.shopify.com/s/files/1/0608/7819/2888/files/yamaha-r1m-2023.jpg?v=1674124878",
+        "modelo": "KTM",
+        "slug": "ducati"
+    },
+    {
+        "id": 3,
+        "image": "https://cdn.shopify.com/s/files/1/0608/7819/2888/files/ducati-panigale-2023.jpg?v=1674124748",
+        "modelo": "LOCIN",
+        "slug": "ducati"
+    },
+    {
+        "id": 4,
+        "image": "https://cdn.shopify.com/s/files/1/0608/7819/2888/files/yamaha-r1m-2023.jpg?v=1674124878",
+        "modelo": "BAJAJ",
+        "slug": "ducati"
+    }
+]

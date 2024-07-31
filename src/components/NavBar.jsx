@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-// import logo from "../assets/logo.jpeg"
+import logo from "../assets/logo.jpeg"
 import SearchBar from "./SearchBar";
 
 
 export default function NavBar() {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-bg px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,7 +38,9 @@ export default function NavBar() {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a href="/">
+                    <img src={logo} alt="logo" className="w-24 h-10 sm:w-32 sm:h-14"/>
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-10">

@@ -11,9 +11,8 @@ export default function SearchBar() {
         if (search.trim() !== "") {
             setIsLoading(true);
             try {
-                const response = await fetch(
-                    `https://bluemotorsec.com/wp-json/wp/v2/productos-tienda?search=${search}`
-                );
+                const productUrl = `${import.meta.env.VITE_API_URL}?acf_format=standard`;
+                const response = await fetch(productUrl);
                 const results = await response.json();
                 setSearchResult(results);
             } catch (error) {
@@ -131,7 +130,7 @@ export default function SearchBar() {
                                                 <CheckCircleIcon className="w-5 h-5 text-primary" />
                                                 <div>
                                                     <p className="text-white text-lg">
-                                                        {producto.acf.nombre}
+                                                        {producto.acf.modelo}
                                                     </p>
                                                 </div>
                                             </div>

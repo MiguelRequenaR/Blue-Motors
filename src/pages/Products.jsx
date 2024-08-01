@@ -8,8 +8,7 @@ export default function Products() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productUrl = `${import.meta.env.VITE_API_URL}?acf_format=standard`;
-                const response = await fetch(productUrl);
+                const response = await fetch("https://bluemotorsec.com/wp-json/wp/v2/motos?acf_format=standard");
                 const data = await response.json();
                 console.log(data);
                 setProducts(data);

@@ -20,5 +20,5 @@ export default function Overview({ colores }) {
 }
 
 Overview.propTypes = {
-    colores: PropTypes.array.isRequired
+    colores: PropTypes.string.isRequired
 };

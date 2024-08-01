@@ -46,7 +46,7 @@ export default function ProductView() {
             const response = await fetch(productUrl);
             const data = await response.json();
             setProduct(data);
-            console.log(data); // Mover el console.log aquí para asegurar que se registre después de establecer el estado
+            console.log(data); 
         } catch (error) {
             console.log("Error fetching data: ", error);
         }

@@ -54,7 +54,7 @@ export default function NavBar() {
                             </ul>
                         </details>
                     </li>
-                    <li><Link to="/products">Tienda</Link></li>
+                    <li><Link to="/producto">Tienda</Link></li>
                 </ul>
             </div>
             <div className="navbar-end">

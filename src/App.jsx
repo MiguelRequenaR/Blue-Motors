@@ -6,6 +6,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductView from "./components/ProductView";
+import ErrorPage from "./pages/Error";
 
 export default function App() {
 
@@ -18,8 +19,9 @@ export default function App() {
             <MainLayout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/products" element={<Products />} />     
+                    <Route path="/producto" element={<Products />} />  
                     <Route path="/producto/:id" element={<ProductView />} />
+                    <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </MainLayout>
         </Router>

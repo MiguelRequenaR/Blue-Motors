@@ -11,11 +11,10 @@ export default function SearchBar() {
         if (search.trim() !== "") {
             setIsLoading(true);
             try {
-                const response = await fetch(
-                    "https://bluemotorsec.com/wp-json/wp/v2/motos?acf_format=standard"
-                );
-                const results = await response.json();
-                setSearchResult(results);
+                const url = `${import.meta.env.VITE_API_URL}/?acf_format=standard`;
+                const response = await fetch(url);
+                const data = await response.json();
+                setSearchResult(data);
             } catch (error) {
                 console.log("Error fetching data: ", error);
             } finally {

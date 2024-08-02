@@ -19,7 +19,7 @@ export default function App() {
             <MainLayout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/producto" element={<Products />} />  
+                    <Route path="/producto" element={<Products />} />
                     <Route path="/producto/:id" element={<ProductView />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>

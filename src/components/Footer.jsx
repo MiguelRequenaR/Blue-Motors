@@ -6,7 +6,7 @@ export default function Footer() {
             <div 
                 className="mt-20 grid lg:grid-cols-3 gap-10 p-20"
                 data-aos='fade-right'
-                data-aos-delay='200'
+                data-aos-delay='300'
                 data-aos-duration='500'
             >
                 <div className="bg-primary p-10 rounded-lg">

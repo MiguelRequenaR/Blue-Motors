@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <div className="bg-bg">
             <div 
-                className="mt-20 grid lg:grid-cols-3 gap-10 p-20"
+                className="mt-20 grid lg:grid-cols-3 gap-10 p-10"
                 data-aos='fade-right'
                 data-aos-delay='300'
                 data-aos-duration='500'
@@ -46,9 +46,6 @@ export default function Footer() {
             <hr className="border-gray-200 w-[90%] mx-auto" />
             <div 
                 className="flex flex-col sm:flex-row justify-center sm:justify-around items-center mt-10 space-y-4 sm:space-y-0 pb-5"
-                data-aos='fade-right'
-                data-aos-delay='200'
-                data-aos-duration='500'
             >
                 <img src={logo} alt="Logo" className="w-24 h-10 sm:w-32 sm:h-14"/>
                 <p className="text-center sm:text-left text-sm sm:text-base">© 2024 BlueMotors. Todos los derechos reservados.</p>

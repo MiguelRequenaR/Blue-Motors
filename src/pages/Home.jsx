@@ -55,11 +55,10 @@ export default function Home() {
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div className="text-center p-4 md:p-6">
                             <h1 className="text-white text-xl md:text-3xl font-bold mb-2">
-                                Paquete básico de inicio
+                                Siente el rugido
                             </h1>
                             <p className="text-white text-sm md:text-lg font-bold">
-                                Ha llegado el momento de ser genial. La gente de este mundo rechaza a las personas por ser geniales.
-                                <span className="text-primary font-bold"> Por destacar.</span>
+                                Vive la pasión por las motos
                             </p>
                         </div>
                     </div>

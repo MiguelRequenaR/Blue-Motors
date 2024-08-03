@@ -1,55 +1,27 @@
+import PropTypes from 'prop-types';
 
-export default function Specifications() {
+export default function Specifications({
+    marca,
+    modelo,
+    cilindraje,
+    motor,
+    potencia,
+    chasis,
+}) {
     return (
         <div className="space-y-2">
             <h1 className="text-xl font-bold my-4">Generales</h1>
             <hr className="border-gray-700" />
             <div className="flex items-center justify-between">
                 <span className="text-white/50 uppercase text-xs"> Modelo</span>
-                <span className="font-bold"> 1</span>
+                <span className="font-bold"> {modelo}</span>
             </div>
             <hr className="border-gray-700" />
             <div className="flex items-center justify-between">
                 <span className="text-white/50 uppercase text-xs"> Marca</span>
-                <span className="font-bold"> 1</span>
-            </div>
-            <hr className="border-gray-700" />
-            <div className="flex items-center justify-between">
-                <span className="text-white/50 uppercase text-xs"> Año</span>
-                <span className="font-bold"> 1</span>
-            </div>
-            <hr className="border-gray-700" />
-            <div className="pt-10">
-                <h1 className="text-xl font-bold">Dimensiones</h1>
-            </div>
-            <hr className="border-gray-700" />
-            <div
-                className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
-            >
-                <span className="text-white/50 uppercase text-xs">Largo</span>
-                <span className="font-bold text-sm">1 metros</span>
-            </div>
-            <hr className="border-gray-700" />
-            <div
-                className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
-            >
-                <span className="text-white/50 uppercase text-xs">Ancho</span>
-                <span className="font-bold text-sm">1 metros</span>
-            </div>
-            <hr className="border-gray-700" />
-            <div
-                className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
-            >
-                <span className="text-white/50 uppercase text-xs">Altura</span>
-                <span className="font-bold text-sm">1 metros</span>
-            </div>
-            <hr className="border-gray-700" />
-            <div
-                className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
-            >
-                <span className="text-white/50 uppercase text-xs">Peso</span>
-                <span className="font-bold text-sm">1 KG.</span>
-            </div>
+                <span className="font-bold"> {marca}</span>
+            </div>            
+                        
             <div className="pt-10">
                 <h1 className="text-xl font-bold">Motor</h1>
             </div>
@@ -57,32 +29,39 @@ export default function Specifications() {
             <div
                 className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
             >
-                <span className="text-white/50 uppercase text-xs"> Tipo</span>
-                <span className="font-bold text-sm">1</span>
+                <span className="text-white/50 uppercase text-xs"> Motor</span>
+                <span className="font-bold text-sm">{motor}</span>
             </div>
             <hr className="border-gray-700" />
             <div
                 className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
             >
-                <span className="text-white/50 uppercase text-xs"> Cilindrada</span>
-                <span className="font-bold text-sm">1cc.</span>
+                <span className="text-white/50 uppercase text-xs"> Cilindraje</span>
+                <span className="font-bold text-sm">{cilindraje}</span>
             </div>
             <hr className="border-gray-700" />
             <div
                 className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
             >
-                <span className="text-white/50 uppercase text-xs">Capacidad del tanque</span>
-                <span className="font-bold text-sm">1 litros</span>
+                <span className="text-white/50 uppercase text-xs">Potencia</span>
+                <span className="font-bold text-sm">{potencia}</span>
             </div>
             <hr className="border-gray-700" />
             <div
                 className="flex lg:items-center lg:justify-between gap-3 lg:gap-0 lg:flex-row flex-col"
             >
-                <span className="text-white/50 uppercase text-xs">
-                    Sistema de Refrigeración</span
-                >
-                <span className="font-bold text-sm">1</span>
+                <span className="text-white/50 uppercase text-xs">Chasis</span>
+                <span className="font-bold text-sm">{chasis}</span>
             </div>
         </div>
     )
 }
+
+Specifications.propTypes = {
+    marca: PropTypes.string.isRequired,
+    modelo: PropTypes.string.isRequired,
+    cilindraje: PropTypes.string.isRequired,
+    motor: PropTypes.string.isRequired,
+    potencia: PropTypes.string.isRequired,
+    chasis: PropTypes.string.isRequired,
+};

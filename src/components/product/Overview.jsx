@@ -12,9 +12,6 @@ export default function Overview({ colores }) {
                 <p className="text-sm">{colores}</p>
                 <hr className="border-gray-700" />
             </div>
-            <div className="space-y-5">
-                <h1 className="">Características</h1>
-            </div>
         </div>
     )
 }

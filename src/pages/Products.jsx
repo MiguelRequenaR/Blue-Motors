@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import Loading from "../components/Loading";
 
 export default function Products() {
 
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -13,6 +15,7 @@ export default function Products() {
                 const data = await response.json();
                 console.log(data);
                 setProducts(data);
+                setIsLoading(false);
             } catch (error) {
                 console.log("Error fetching data: ", error);
             }
@@ -20,6 +23,9 @@ export default function Products() {
         fetchProducts();
     }, []);
 
+    if (isLoading) {
+        return (<Loading />);
+    }
 
     return (
         <div className=" py-12 px-4 sm:px-6 lg:px-8 pt-32">

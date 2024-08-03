@@ -6,15 +6,24 @@ import Specifications from "./product/Specifications";
 import Gallery from "./product/Gallery";
 import ContactForm from "./product/ContactForm";
 import Carousel from "./product/Carousel";
+import Loading from "./Loading";
 
 
 export default function ProductView() {
 
     const [activeTab, setActiveTab] = useState("1");
     const copyUrlBtnRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [product, setProduct] = useState({});
+    const { id } = useParams();
 
     useEffect(() => {
-        const copyUrlBtn = copyUrlBtnRef.current;
+        if (id) {
+            fetchProduct();
+        }
+    }, [id]);
+
+    useEffect(() => {
         const handleCopyUrl = () => {
             navigator.clipboard
                 .writeText(window.location.href)
@@ -26,19 +35,14 @@ export default function ProductView() {
                 });
         };
 
-        copyUrlBtn.addEventListener("click", handleCopyUrl);
-
-        return () => {
-            copyUrlBtn.removeEventListener("click", handleCopyUrl);
-        };
+        const copyUrlBtn = copyUrlBtnRef.current;
+        if (copyUrlBtn) {
+            copyUrlBtn.addEventListener("click", handleCopyUrl);
+            return () => {
+                copyUrlBtn.removeEventListener("click", handleCopyUrl);
+            };
+        }
     }, []);
-
-    const handleTabClick = (tabId) => {
-        setActiveTab(tabId);
-    };
-
-    const [product, setProduct] = useState({});
-    const { id } = useParams();
 
     async function fetchProduct() {
         try {
@@ -46,21 +50,22 @@ export default function ProductView() {
             const response = await fetch(productUrl);
             const data = await response.json();
             setProduct(data);
-            console.log(data); 
+            setIsLoading(false);
+            console.log(data);
         } catch (error) {
             console.log("Error fetching data: ", error);
         }
     }
 
-    useEffect(() => {
+    const handleTabClick = (tabId) => {
+        setActiveTab(tabId);
+    };
 
-        if (id) {
-            fetchProduct();
-        }
-    }, [id]);
+    if (isLoading) {
+        return <Loading />;
+    }
 
     if (!product) return null;
-    console.log(product);
 
     const images = product.acf ? [
         product.acf.imagen_1,
@@ -68,10 +73,10 @@ export default function ProductView() {
         product.acf.imagen_3,
     ] : [];
 
-    
+
     return (
         <div className="text-white p-10 max-w-5xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
-            <div 
+            <div
                 className="flex flex-col gap-4 md:w-1/3"
                 data-aos='fade-right'
                 data-aos-delay='1000'
@@ -125,7 +130,7 @@ export default function ProductView() {
                     </div>
                 </div>
             </div>
-            <div 
+            <div
                 className="space-y-10 lg:w-[90vh]"
                 data-aos='fade-left'
                 data-aos-delay='1000'
@@ -183,9 +188,17 @@ export default function ProductView() {
                         </button>
                     </div>
                     <div className="p-4">
-                        {activeTab === "1" && product.acf && <Overview colores={product.acf.colores}/>}
-                        {activeTab === "2" && <Specifications />}
-                        {activeTab === "3" && <Gallery />}
+                        {activeTab === "1" && product.acf && <Overview colores={product.acf.colores} />}
+                        {activeTab === "2" && product.acf &&
+                            <Specifications 
+                                marca={product.acf.marca.name}
+                                modelo={product.acf.modelo}
+                                cilindraje={product.acf.cilindraje}
+                                motor={product.acf.motor}
+                                potencia={product.acf.potencia}
+                                chasis={product.acf.chasis}
+                            />}
+                        {activeTab === "3" && product.acf  && <Gallery images={images} />}
                         {activeTab === "4" && <ContactForm />}
                     </div>
                 </div>

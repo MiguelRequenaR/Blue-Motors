@@ -5,6 +5,7 @@ export default function SearchBar() {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSearch = async () => {
@@ -14,7 +15,14 @@ export default function SearchBar() {
                 const url = `${import.meta.env.VITE_API_URL}/?acf_format=standard`;
                 const response = await fetch(url);
                 const data = await response.json();
-                setSearchResult(data);
+
+                setAllProducts(data);
+
+                const filterResult = data.filter((producto) =>
+                    producto.acf.modelo.toLowerCase().includes(search.toLowerCase())
+                );
+                setSearchResult(filterResult);
+
             } catch (error) {
                 console.log("Error fetching data: ", error);
             } finally {

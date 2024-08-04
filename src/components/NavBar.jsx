@@ -1,24 +1,24 @@
 import logo from "../assets/logo.jpeg";
 import SearchBar from "./SearchBar";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export default function NavBar() {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const url = `${import.meta.env.VITE_API_URL}/?acf_format=standard`;
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data);
-                setProducts(data);
-            } catch (error) {
-                console.log("Error fetching data: ", error);
-            }
-        };
-        fetchProducts();
-    }, []);
+    // useEffect(() => {
+    //     const fetchProducts = async () => {
+    //         try {
+    //             const url = `${import.meta.env.VITE_API_URL}/?acf_format=standard`;
+    //             const response = await fetch(url);
+    //             const data = await response.json();
+    //             console.log(data);
+    //             setProducts(data);
+    //         } catch (error) {
+    //             console.log("Error fetching data: ", error);
+    //         }
+    //     };
+    //     fetchProducts();
+    // }, []);
 
     return (
         <div className="navbar bg-bg px-3">
@@ -45,19 +45,18 @@ export default function NavBar() {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                     >
                         <li><a href="/">Inicio</a></li>
-                        <li>
+                        {/* <li>
                             <a>Productos</a>
                             <ul className="p-2 mt-2">
                                 {products.map(product => (
                                     <li key={product.id}>
                                         <a href={`/producto/${product.id}`}>
                                             <div>{product.acf.marca.name}</div>
-                                            <div>{product.acf.modelo}</div>
                                         </a>
                                     </li>
                                 ))}
                             </ul>
-                        </li>
+                        </li> */}
                         <li><a href="/producto">Tienda</a></li>
                     </ul>
                 </div>
@@ -68,7 +67,7 @@ export default function NavBar() {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-10">
                     <li><a href="/">Inicio</a></li>
-                    <li>
+                    {/* <li>
                         <details>
                             <summary>Productos</summary>
                             <ul className="p-2">
@@ -76,13 +75,12 @@ export default function NavBar() {
                                     <li key={product.id}>
                                         <a href={`/producto/${product.id}`}>
                                             <div>{product.acf.marca.name}</div>
-                                            <div>{product.acf.modelo}</div>
                                         </a>
                                     </li>
                                 ))}
                             </ul>
                         </details>
-                    </li>
+                    </li> */}
                     <li><a href="/producto">Tienda</a></li>
                 </ul>
             </div>

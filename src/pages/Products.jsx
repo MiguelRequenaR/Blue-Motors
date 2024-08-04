@@ -52,6 +52,7 @@ export default function Products() {
                             key={product.id}
                             image={product.acf.imagen_1}
                             modelo={product.acf.modelo}
+                            marca={product.acf.marca.name}
                             slug={product.slug}
                             link={`/producto/${product.id}`}
                         />

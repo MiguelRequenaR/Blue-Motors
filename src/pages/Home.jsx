@@ -27,7 +27,7 @@ export default function Home() {
 
           <div>
             <button className="animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90">
-              <a href="/productos">
+              <a href="/motos">
                 <p>Explora la nueva colección</p>
               </a>
             </button>

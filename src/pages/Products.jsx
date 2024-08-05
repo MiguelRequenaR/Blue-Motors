@@ -39,7 +39,7 @@ export default function Products() {
             Explora los modelos de motocicletas que tenemos
           </div>
           <a
-            href="/products"
+            href="/motos"
             className="text-gray-300 hover:text-white mb-8 inline-block"
           >
             Contactanos si deseas un modelo especial &gt;

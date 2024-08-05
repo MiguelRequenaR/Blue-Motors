@@ -41,12 +41,13 @@ export default function ProductsFiltered() {
           <div className="text-3xl font-bold text-white mb-2">
             Explora los modelos de motocicletas que tenemos
           </div>
-          <a
-            href="/products"
+
+          <span
+            href="https://wa.me/+51958455485?text=Hola, quiero un modelo en especifico."
             className="text-gray-300 hover:text-white mb-8 inline-block"
           >
             Contactanos si deseas un modelo especial &gt;
-          </a>
+          </span>
         </div>
         <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"

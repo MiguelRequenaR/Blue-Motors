@@ -22,9 +22,9 @@ export default function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Products />} />
-          <Route path="/productos/:marca" element={<ProductsFiltered />} />
-          <Route path="/producto/:id" element={<ProductView />} />
+          <Route path="/motos" element={<Products />} />
+          <Route path="/motos/:marca" element={<ProductsFiltered />} />
+          <Route path="/moto/:id" element={<ProductView />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </MainLayout>

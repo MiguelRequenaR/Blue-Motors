@@ -43,15 +43,24 @@ export default function NavBar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-black z-50 mt-3 w-56 p-2 shadow space-y-3"
           >
             <li>
               <a href="/">Inicio</a>
             </li>
 
             <li>
-              <a href="/producto">Tienda</a>
+              <a href="/motos">Tienda</a>
             </li>
+            <hr className="my-4" />
+            <span className="block text-xs pl-3   text-slate-700">Marcas</span>
+            {marcas.map((marca) => (
+              <li key={marca.id}>
+                <a href={`/motos/${marca.slug}`}>
+                  <div>{marca.name}</div>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <a href="/">
@@ -66,7 +75,7 @@ export default function NavBar() {
           </li>
 
           <li>
-            <a href="/producto">Tienda</a>
+            <a href="/motos">Tienda</a>
           </li>
 
           <li className="z-50">
@@ -75,7 +84,7 @@ export default function NavBar() {
               <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-xl grid grid-cols-3 gap-2 w-[500px]">
                 {marcas.map((marca) => (
                   <li key={marca.id}>
-                    <a href={`/marca/${marca.slug}`}>
+                    <a href={`/motos/${marca.slug}`}>
                       <div>{marca.name}</div>
                     </a>
                   </li>

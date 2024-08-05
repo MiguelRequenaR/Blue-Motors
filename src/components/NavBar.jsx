@@ -4,20 +4,18 @@ import SearchBar from "./SearchBar";
 
 export default function NavBar() {
   const [marcas, setMarcas] = useState([]);
+  const fetchProducts = async () => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/marcas/?acf_format=standard`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setMarcas(data);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const url = `${
-          import.meta.env.VITE_API_URL
-        }/marcas/?acf_format=standard`;
-        const response = await fetch(url);
-        const data = await response.json();
-        setMarcas(data);
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
-    };
     fetchProducts();
   }, []);
 

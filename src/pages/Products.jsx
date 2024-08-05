@@ -5,20 +5,19 @@ import Loading from "../components/Loading";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const fetchProducts = async () => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setProducts(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        setProducts(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log("Error fetching data: ", error);
-      }
-    };
     fetchProducts();
   }, []);
 
@@ -58,7 +57,7 @@ export default function Products() {
               modelo={product.acf.modelo}
               marca={product.acf.marca.name}
               slug={product.slug}
-              link={`/producto/${product.id}`}
+              link={`/moto/${product.id}`}
             />
           ))}
         </div>

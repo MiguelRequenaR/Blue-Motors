@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
+import { useParams } from "react-router-dom";
 
-export default function Products() {
+export default function ProductsFiltered() {
+  const { marca } = useParams();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
+        const url = `${
+          import.meta.env.VITE_API_URL
+        }/motos?acf_format=standard&marca=${marca}`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         setProducts(data);
         setIsLoading(false);
       } catch (error) {
-        console.log("Error fetching data: ", error);
+        console.log("Error fetching products: ", error);
       }
     };
+
     fetchProducts();
   }, []);
 

@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductView from "./components/ProductView";
 import ErrorPage from "./pages/Error";
-import ProductsFiltered from "./pages/Filtredes";
+// import ProductsFiltered from "./pages/Filtredes";
 
 export default function App() {
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/motos" element={<Products />} />
-          <Route path="/motos/:marca" element={<ProductsFiltered />} />
+          {/* <Route path="/motos/:marca" element={<ProductsFiltered />} /> */}
           <Route path="/moto/:id" element={<ProductView />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

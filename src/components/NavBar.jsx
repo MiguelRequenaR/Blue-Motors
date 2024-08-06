@@ -74,7 +74,7 @@ export default function NavBar() {
             <a href="/motos">Tienda</a>
           </li>
 
-          <li className="z-50">
+          {/* <li className="z-50">
             <details>
               <summary>Marcas</summary>
               <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-xl grid grid-cols-3 gap-2 w-[500px]">
@@ -87,7 +87,7 @@ export default function NavBar() {
                 ))}
               </ul>
             </details>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="navbar-end">

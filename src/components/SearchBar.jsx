@@ -12,14 +12,14 @@ export default function SearchBar() {
     if (search.trim() !== "") {
       setIsLoading(true);
       try {
-        const url = `${import.meta.env.VITE_API_URL}/?acf_format=standard`;
+        const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
         const response = await fetch(url);
         const data = await response.json();
 
         setAllProducts(data);
 
         const filterResult = data.filter((producto) =>
-          producto.acf.modelo.toLowerCase().includes(search.toLowerCase())
+          producto.acf.marca.name.toLowerCase().includes(search.toLowerCase())
         );
         setSearchResult(filterResult);
       } catch (error) {
@@ -140,7 +140,7 @@ export default function SearchBar() {
                         <CheckCircleIcon className="w-5 h-5 text-primary" />
                         <div>
                           <p className="text-white text-lg">
-                            {producto.acf.modelo}
+                            {producto.acf.marca.name}
                           </p>
                         </div>
                       </div>

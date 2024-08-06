@@ -70,7 +70,7 @@ export default function ProductView() {
     : [];
 
   return (
-    <div className="text-white py-10 max-w-5xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
+    <div className="text-white py-10 max-w-6xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
       <div
         className="flex flex-col gap-4 w-full lg:w-1/3"
         data-aos="fade-right"
@@ -97,7 +97,7 @@ export default function ProductView() {
                 {product.acf.cilindraje}
               </div>
               <hr className="border-gray-700" />
-              <div className="flex justify-between">
+              <div className="flex justify-between text-end items-center">
                 <span className="text-gray-400 uppercase text-xs">Motor:</span>
                 {product.acf.motor}
               </div>

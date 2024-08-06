@@ -19,7 +19,7 @@ export default function SearchBar() {
         setAllProducts(data);
 
         const filterResult = data.filter((producto) =>
-          producto.acf.marca.name.toLowerCase().includes(search.toLowerCase())
+          producto.acf.modelo.toLowerCase().includes(search.toLowerCase())
         );
         setSearchResult(filterResult);
       } catch (error) {
@@ -140,7 +140,7 @@ export default function SearchBar() {
                         <CheckCircleIcon className="w-5 h-5 text-primary" />
                         <div>
                           <p className="text-white text-lg">
-                            {producto.acf.marca.name}
+                            {producto.acf.modelo}
                           </p>
                         </div>
                       </div>

@@ -54,9 +54,7 @@ export default function NavBar() {
             <span className="block text-xs pl-3   text-slate-700">Marcas</span>
             {marcas.map((marca) => (
               <li key={marca.id}>
-                <a href={`/motos/${marca.slug}`}>
-                  <div>{marca.name}</div>
-                </a>
+                <a href={`/motos/${marca.slug}`}>{marca.name}</a>
               </li>
             ))}
           </ul>

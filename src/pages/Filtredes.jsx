@@ -6,24 +6,43 @@ import { useParams } from "react-router-dom";
 export default function ProductsFiltered() {
   const { marca } = useParams();
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const url = `${
-          import.meta.env.VITE_API_URL
-        }/motos?acf_format=standard&marca=${marca}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        setProducts(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log("Error fetching products: ", error);
-      }
-    };
 
+  const fetchProducts = async () => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setProducts(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log("Error fetching products: ", error);
+      setIsLoading(false); // Ensure loading state is updated even on error
+    }
+  };
+
+  const classifyProductsByMarca = (marca) => {
+    if (!marca) {
+      console.error("Marca is not defined");
+      return;
+    }
+
+    const filtered = products.filter((product) => {
+      return product.acf && product.acf.marca && product.acf.marca === marca;
+    });
+
+    setFilteredProducts(filtered);
+    console.log("Filtered Products:", filtered);
+  };
+
+  useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    classifyProductsByMarca(marca);
+  }, [marca, products]);
 
   if (isLoading) {
     return <Loading />;
@@ -55,16 +74,17 @@ export default function ProductsFiltered() {
           data-aos-delay="1500"
           data-aos-duration="500"
         >
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              image={product.acf.imagen_1}
-              modelo={product.acf.modelo}
-              marca={product.acf.marca.name}
-              slug={product.slug}
-              link={`/producto/${product.id}`}
-            />
-          ))}
+          {filteredProducts &&
+            filteredProducts.map((filteredProduct) => (
+              <ProductCard
+                key={filteredProduct.id}
+                image={filteredProduct.acf.imagen_1}
+                modelo={filteredProduct.acf.modelo}
+                marca={filteredProduct.acf.marca.name}
+                slug={filteredProduct.slug}
+                link={`/moto/${filteredProduct.id}`}
+              />
+            ))}
         </div>
       </div>
     </div>

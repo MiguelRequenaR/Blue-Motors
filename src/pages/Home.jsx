@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Products from "./Products";
-import HeroImage from "./../assets/hero.jpg";
+import HeroImage from "./../assets/portada.jpg";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         }}
       >
         <div
-          className="space-y-16 mb-20"
+          className="space-y-16 mb-64"
           data-aos="fade-left"
           data-aos-delay="200"
           data-aos-duration="500"

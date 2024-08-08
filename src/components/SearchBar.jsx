@@ -132,7 +132,7 @@ export default function SearchBar() {
                 <div className="mt-4">
                   {searchResult.map((producto, index) => (
                     <a
-                      href={`/producto/${producto.id}`}
+                      href={`/moto/${producto.id}`}
                       className="hover:opacity-50"
                       key={index}
                     >

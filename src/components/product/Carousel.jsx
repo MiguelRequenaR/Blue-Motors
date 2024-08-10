@@ -1,21 +1,35 @@
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
+import "animate.css";
 export default function Carousel({ images }) {
-    return (
-        <div className="carousel w-full">
-            {images.map((image, index) => (
-                <div key={index} id={`slide${index + 1}`} className="carousel-item relative flex justify-center w-full">
-                    <img src={image} className="w-[90%]" />
-                    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                        <a href={`#slide${index === 0 ? images.length : index}`} className="btn btn-circle">❮</a>
-                        <a href={`#slide${(index + 1) % images.length + 1}`} className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-            ))}
+  return (
+    <div className="carousel w-full animate__animated animate__fadeInUp">
+      {images.map((image, index) => (
+        <div
+          key={index}
+          id={`slide${index + 1}`}
+          className="carousel-item relative flex justify-center w-full"
+        >
+          <img src={image} className="w-[70%] h-[80%]" />
+          <div className="absolute left-5 right-5 top-1/3 flex -translate-y-1/2 transform justify-between">
+            <a
+              href={`#slide${index === 0 ? images.length : index}`}
+              className="btn btn-circle"
+            >
+              ❮
+            </a>
+            <a
+              href={`#slide${((index + 1) % images.length) + 1}`}
+              className="btn btn-circle"
+            >
+              ❯
+            </a>
+          </div>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 Carousel.propTypes = {
-    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

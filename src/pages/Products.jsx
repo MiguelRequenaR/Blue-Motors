@@ -53,7 +53,7 @@ export default function Products() {
           {products.map((product) => (
             <ProductCard
               key={product.id}
-              image={product.acf.imagen_1}
+              image={product.acf.imagen_principal}
               modelo={product.acf.modelo}
               marca={product.acf.marca.name}
               slug={product.slug}

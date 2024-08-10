@@ -1,24 +1,25 @@
-import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
 import { PhoneIcon, ShareIcon } from "@heroicons/react/20/solid";
-import Overview from "./product/Overview";
-import Specifications from "./product/Specifications";
-import Gallery from "./product/Gallery";
-import ContactForm from "./product/ContactForm";
-import Carousel from "./product/Carousel";
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import Loading from "./Loading";
+import Carousel from "./product/Carousel";
+import ContactForm from "./product/ContactForm";
+import Specifications from "./product/Specifications";
 
 export default function ProductView() {
   const [activeTab, setActiveTab] = useState("1");
-  const copyUrlBtnRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
+  const [selectedColor, setSelectedColor] = useState(null);
+  const copyUrlBtnRef = useRef(null);
   const { id } = useParams();
+
   useEffect(() => {
     if (id) {
       fetchProduct();
     }
   }, [id]);
+
   useEffect(() => {
     const handleCopyUrl = () => {
       navigator.clipboard
@@ -49,10 +50,27 @@ export default function ProductView() {
       const data = await response.json();
       setProduct(data);
       setIsLoading(false);
-      console.log(data);
+
+      // Set the default selected color to the first available color, if any
+      const availableColors = getAvailableColors(data.acf);
+      if (availableColors.length > 0) {
+        setSelectedColor(availableColors[0].url);
+      }
     } catch (error) {
       console.log("Error fetching data: ", error);
     }
+  }
+
+  function getAvailableColors(acf) {
+    return [
+      { name: "Rojo", url: acf.rojo, hex: "#E74C3C" },
+      { name: "Negro", url: acf.negro, hex: "#2C3E50" },
+      { name: "Blanco", url: acf.blanco, hex: "#ECF0F1" },
+      { name: "Verde", url: acf.verde, hex: "#2ECC71" },
+      { name: "Amarillo", url: acf.amarillo, hex: "#F1C40F" },
+      { name: "Naranja", url: acf.naranja, hex: "#E67E22" },
+      { name: "Azul", url: acf.azul, hex: "#3498DB" },
+    ].filter((color) => color.url);
   }
 
   const handleTabClick = (tabId) => {
@@ -65,9 +83,7 @@ export default function ProductView() {
 
   if (!product) return null;
 
-  const images = product.acf
-    ? [product.acf.imagen_1, product.acf.imagen_2, product.acf.imagen_3]
-    : [];
+  const colors = getAvailableColors(product.acf);
 
   return (
     <div className="text-white py-10 max-w-6xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
@@ -128,6 +144,7 @@ export default function ProductView() {
             </button>
           </div>
         </div>
+        <img src={product.acf.imagen} className="w-full h-full object-cover" />
       </div>
       <div
         className="space-y-10 lg:w-[90vh]"
@@ -137,23 +154,54 @@ export default function ProductView() {
       >
         {product.acf && (
           <div className="flex justify-between items-center lg:px-0 px-4">
-            <div className="flex justify-items-start flex-col md:w-1/2">
-              <h4 className="text-gray-400 uppercase text-xs  lg:text-sm font-semibold">
+            <div className="flex justify-items-start w-full flex-col ">
+              <h4 className="text-gray-400 uppercase text-xs lg:text-sm font-semibold">
                 {product.acf.marca.name}
               </h4>
-              <h1 className="lg:text-3xl text-xl font-bold">
+              <h1 className="lg:text-2xl text-xl font-bold">
                 {product.acf.modelo}
               </h1>
             </div>
-            <div className="rounded-md flex justify-items-end py-2 flex-col px-5 text-right bg-primary w-fit">
-              <h5 className="text-white/60 lg:text-sm text-xs">Chasis</h5>
-              <h1 className="lg: text-xl font-bold">{product.acf.chasis}</h1>
-            </div>
+            <a
+              href="https://wa.me/+51958455485?text=Hola, quiero reservar un coche motorizado"
+              target="_blank"
+              className="rounded-md flex justify-items-end py-2 flex-col px-5 text-right bg-primary w-fitlg:text-xl font-bold hover:opacity-80"
+            >
+              Contáctanos
+            </a>
           </div>
         )}
         <hr className="border-gray-500" />
 
-        <Carousel images={images} />
+        {/* <Carousel images={colors.map((color) => color.url)} /> */}
+        <div className="space-y-5 flex flex-col">
+          <span className="text-gray-400 uppercase text-xs">
+            Colores disponibles
+          </span>
+          <div className="flex lg:w-full overflow-x-auto lg:overflow-x-hidden gap-2">
+            {colors.map((color) => (
+              <button
+                key={color.name}
+                onClick={() => setSelectedColor(color.url)}
+                className={` w-6 h-6  rounded-full  ${
+                  selectedColor === color.url ? "border-2 border-white" : ""
+                }`}
+                style={{ backgroundColor: color.hex }}
+              />
+            ))}
+          </div>
+          <div className="flex justify-center my-4">
+            {selectedColor && (
+              <div className="w-[800px] h-[400px] overflow-hidden relative">
+                <img
+                  src={selectedColor}
+                  alt="Imagen del producto"
+                  className="object-contain w-full h-full mt-10"
+                />
+              </div>
+            )}
+          </div>
+        </div>
 
         <div className="flex flex-col">
           <div className="flex lg:w-full overflow-x-auto lg:overflow-x-hidden">
@@ -163,7 +211,7 @@ export default function ProductView() {
                 activeTab === "1" ? "border-b-0 border-border" : ""
               }`}
             >
-              Vista General
+              Especificaciones
             </button>
             <button
               onClick={() => handleTabClick("2")}
@@ -171,7 +219,7 @@ export default function ProductView() {
                 activeTab === "2" ? "border-b-0 border-border" : ""
               }`}
             >
-              Especificaciones
+              Galeria
             </button>
             <button
               onClick={() => handleTabClick("3")}
@@ -179,22 +227,11 @@ export default function ProductView() {
                 activeTab === "3" ? "border-b-0 border-border" : ""
               }`}
             >
-              Galeria
-            </button>
-            <button
-              onClick={() => handleTabClick("4")}
-              className={`p-4 focus:bg-light-bg focus:border-t-2 focus:border-t-primary uppercase text-xs w-full font-bold min-w-36 focus:border-border focus:bg-bg bg-primary flex justify-center items-center ${
-                activeTab === "4" ? "border-b-0 border-border" : ""
-              }`}
-            >
               Contáctanos
             </button>
           </div>
           <div className="p-4">
             {activeTab === "1" && product.acf && (
-              <Overview colores={product.acf.colores} />
-            )}
-            {activeTab === "2" && product.acf && (
               <Specifications
                 marca={product.acf.marca.name}
                 modelo={product.acf.modelo}
@@ -204,8 +241,10 @@ export default function ProductView() {
                 chasis={product.acf.chasis}
               />
             )}
-            {activeTab === "3" && product.acf && <Gallery images={images} />}
-            {activeTab === "4" && <ContactForm />}
+            {activeTab === "2" && product.acf && (
+              <Carousel images={colors.map((color) => color.url)} />
+            )}
+            {activeTab === "3" && <ContactForm />}
           </div>
         </div>
       </div>

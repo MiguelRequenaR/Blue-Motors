@@ -6,11 +6,9 @@ export default function Gallery({ images }) {
     <div className="space-y-5 animate__animated animate__fadeInUp">
       <h1 className="text-xl font-bold my-4">Galeria de imágenes</h1>
       <hr className="border-gray-700" />
-      <div className="grid lg:grid-cols-2 lg:gap-12 grid-cols-1 gap-4">
+      <div className="space-y-5 ">
         {images.map((image, index) => (
-          <div key={index} className="flex justify-center items-center">
-            <img src={image} className="w-full rounded-lg" />
-          </div>
+          <img src={image} key={index} className="w-2/3 rounded-lg" />
         ))}
       </div>
     </div>

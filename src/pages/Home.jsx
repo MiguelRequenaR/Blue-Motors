@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Products from "./Products";
-import HeroImage from "./../assets/portada.jpg";
+import HeroImage from "./../assets/hero.jpg";
 
 export default function Home() {
   return (

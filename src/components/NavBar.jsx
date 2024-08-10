@@ -6,7 +6,7 @@ export default function NavBar() {
   const [marcas, setMarcas] = useState([]);
   const fetchProducts = async () => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/marcas/?acf_format=standard`;
+      const url = `${import.meta.env.VITE_API_URL}/marcas?acf_format=standard`;
       const response = await fetch(url);
       const data = await response.json();
       setMarcas(data);
@@ -54,7 +54,7 @@ export default function NavBar() {
             <span className="block text-xs pl-3   text-slate-700">Marcas</span>
             {marcas.map((marca) => (
               <li key={marca.id}>
-                <a href={`/motos/${marca.slug}`}>{marca.name}</a>
+                <a href={`/motos/${marca.name}`}>{marca.name}</a>
               </li>
             ))}
           </ul>
@@ -74,20 +74,20 @@ export default function NavBar() {
             <a href="/motos">Tienda</a>
           </li>
 
-          {/* <li className="z-50">
+          <li className="z-50">
             <details>
               <summary>Marcas</summary>
-              <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-xl grid grid-cols-3 gap-2 w-[500px]">
+              <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-xl grid grid-cols-2 gap-4 w-[500px]">
                 {marcas.map((marca) => (
                   <li key={marca.id}>
-                    <a href={`/motos/${marca.slug}`}>
+                    <a href={`/motos/${marca.name}`}>
                       <div>{marca.name}</div>
                     </a>
                   </li>
                 ))}
               </ul>
             </details>
-          </li> */}
+          </li>
         </ul>
       </div>
       <div className="navbar-end">

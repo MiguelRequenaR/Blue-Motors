@@ -1,28 +1,42 @@
 import PropTypes from "prop-types";
 import "animate.css";
+import { useRef } from "react";
 export default function Carousel({ images }) {
+  const carouselRef = useRef([]);
+  const handleNavigation = (index) => {
+    carouselRef.current[index].scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="carousel w-full animate__animated animate__fadeInUp">
       {images.map((image, index) => (
         <div
           key={index}
-          id={`slide${index + 1}`}
+          ref={(el) => (carouselRef.current[index] = el)}
           className="carousel-item relative flex justify-center w-full"
         >
-          <img src={image} className="w-[70%] h-[80%]" />
-          <div className="absolute left-5 right-5 top-1/3 flex -translate-y-1/2 transform justify-between">
-            <a
-              href={`#slide${index === 0 ? images.length : index}`}
+          <div className="lg:w-[800px] lg:h-[400px] mb-10">
+            <img
+              src={image}
+              alt="Imagen del producto"
+              className="object-contain w-full h-full mt-10 px-10"
+            />
+          </div>
+
+          <div className="absolute left-0 right-0 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <button
+              onClick={() =>
+                handleNavigation(index === 0 ? images.length - 1 : index - 1)
+              }
               className="btn btn-circle"
             >
               ❮
-            </a>
-            <a
-              href={`#slide${((index + 1) % images.length) + 1}`}
+            </button>
+            <button
+              onClick={() => handleNavigation((index + 1) % images.length)}
               className="btn btn-circle"
             >
               ❯
-            </a>
+            </button>
           </div>
         </div>
       ))}

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="bg-bg">
       <div
-        className="mt-20 grid lg:grid-cols-3 gap-10 p-10"
+        className="mt-20 grid lg:grid-cols-3 gap-10 lg:p-10"
         data-aos="fade-right"
         data-aos-delay="300"
         data-aos-duration="500"

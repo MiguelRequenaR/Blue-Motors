@@ -1,8 +1,12 @@
+import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 import Footer from "../components/Footer";
-import Products from "./Products";
 import HeroImage from "./../assets/hero.jpg";
+import StoreImage from "./../assets/local1.png";
 
-export default function Home() {
+import Products from "./Products";
+import PropTypes from "prop-types";
+import { GlobeAltIcon } from "@heroicons/react/20/solid";
+export default function Home({ setIsOpen }) {
   return (
     <>
       <div
@@ -16,20 +20,28 @@ export default function Home() {
         }}
       >
         <div
-          className="space-y-16 mb-64"
+          className="space-y-10 mb-64"
           data-aos="fade-left"
           data-aos-delay="200"
           data-aos-duration="500"
         >
-          <h1 className="text-white text-3xl font-bold lg:text-[50px] lg:w-2/3 mx-auto">
-            ¡Siente el rugido, vive la pasión de las motos!
+          <h4 className="text-white  font-bold   mx-auto">
+            <GlobeAltIcon className="inline-block w-4 h-4 mr-2" />
+            Live To Ride
+          </h4>
+          <h1 className="text-white text-3xl font-bold lg:text-[50px]  mx-auto">
+            ¡Muévete en moto!
           </h1>
 
           <div>
-            <button className="animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90">
-              <a href="/motos">
-                <p>Explora la nueva colección</p>
-              </a>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90"
+            >
+              <p>
+                Buscar una moto
+                <ArrowLongRightIcon className="inline-block w-4 h-4 ml-2" />
+              </p>
             </button>
           </div>
         </div>
@@ -43,19 +55,26 @@ export default function Home() {
         data-aos-delay="200"
         data-aos-duration="500"
       >
-        <div className="relative rounded-lg overflow-hidden w-full m-2 lg:max-w-[70%] max-h-96">
+        <div className="relative lg:rounded-lg overflow-hidden w-full lg:max-w-[70%] max-h-96">
           <img
-            src={HeroImage}
+            src={StoreImage}
             alt="motorcycle"
             className="w-full h-auto object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="text-center p-4 md:p-6">
               <h1 className="text-white text-xl md:text-3xl font-bold mb-2">
-                Siente el rugido
+                ¿Dónde nos puedes encontrar?
               </h1>
-              <p className="text-white text-sm md:text-lg font-bold">
-                Vive la pasión por las motos
+              <p className="text-white text-sm md:text-lg font-bold hidden lg:block">
+                2 sucursales en el Valle de los Chillos – Quito – Ecuador.
+              </p>
+              <p className="text-white text-sm mt-24">
+                MATRIZ: Centro Comercial RIVER MALL, Subsuelo 2 - Local 2
+              </p>
+              <p className="text-white text-sm mt-4">
+                SUCURSAL: Av. San Juan De Dios y Rio Zamora S/N. PLAZA MAKENA -
+                SAN RAFAEL.
               </p>
             </div>
           </div>
@@ -66,3 +85,8 @@ export default function Home() {
     </>
   );
 }
+
+Home.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+};

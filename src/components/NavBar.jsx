@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.jpeg";
 import SearchBar from "./SearchBar";
+import PropTypes from "prop-types";
+import { Bars2Icon } from "@heroicons/react/20/solid";
 
-export default function NavBar() {
+export default function NavBar({ isOpen, setIsOpen }) {
   const [marcas, setMarcas] = useState([]);
   const fetchProducts = async () => {
     try {
@@ -20,40 +22,27 @@ export default function NavBar() {
   }, []);
 
   return (
-    <div className="navbar bg-bg px-3 ">
-      <div className="navbar-start">
+    <div className="navbar bg-bg px-3 lg:px-10">
+      <div className="navbar-start flex lg:justify-start justify-between">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+            <Bars2Icon className="h-6 w-6" />
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-black z-50 mt-3 w-56 p-2 shadow space-y-3"
+            className="menu menu-sm dropdown-content bg-black z-50 mt-3 w-[40dvh] p-2 shadow space-y-3"
           >
-            <li>
+            <li className="duration-300 ease-in-out">
               <a href="/">Inicio</a>
             </li>
 
-            <li>
+            <li className="duration-300 ease-in-out">
               <a href="/motos">Tienda</a>
             </li>
             <hr className="my-4" />
             <span className="block text-xs pl-3   text-slate-700">Marcas</span>
             {marcas.map((marca) => (
-              <li key={marca.id}>
+              <li key={marca.id} className="duration-300 ease-in-out">
                 <a href={`/motos/${marca.name}`}>{marca.name}</a>
               </li>
             ))}
@@ -66,20 +55,20 @@ export default function NavBar() {
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-5">
-          <li>
+          <li className="duration-300 ease-in-out">
             <a href="/">Inicio</a>
           </li>
 
-          <li>
+          <li className="duration-300 ease-in-out">
             <a href="/motos">Tienda</a>
           </li>
 
           <li className="z-50">
             <details>
               <summary>Marcas</summary>
-              <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-xl grid grid-cols-2 gap-4 w-[500px]">
+              <ul className="bg-transparent  rounded-t-none p-2 absolute -left-36 backdrop-blur-2xl grid grid-cols-2 gap-4 w-[500px]">
                 {marcas.map((marca) => (
-                  <li key={marca.id}>
+                  <li key={marca.id} className="duration-300 ease-in-out">
                     <a href={`/motos/${marca.name}`}>
                       <div>{marca.name}</div>
                     </a>
@@ -91,8 +80,13 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <SearchBar />
+        <SearchBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
   );
 }
+
+NavBar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+};

@@ -137,7 +137,7 @@ export default function ProductView() {
             )}
             <div className="mt-4 bg-light-bg">
               <a
-                href="https://wa.me/+51958455485?text=Hola, quiero reservar un coche motorizado"
+                href="mailto:info@bluemotorsec.com"
                 target="_blank"
                 className="hover:bg-primary w-full text-white py-3 flex items-center gap-4 px-4 transition duration-300 ease-in-out rounded-xl"
               >
@@ -171,7 +171,7 @@ export default function ProductView() {
                 </h1>
               </div>
               <a
-                href="https://wa.me/+51958455485?text=Hola, quiero reservar un coche motorizado"
+                href="mailto:info@bluemotorsec.com"
                 target="_blank"
                 className="rounded-md flex justify-items-end py-2 flex-col px-5 text-right bg-primary w-fitlg:text-xl font-bold hover:opacity-80"
               >
@@ -182,11 +182,11 @@ export default function ProductView() {
           <hr className="border-gray-500" />
 
           {/* <Carousel images={colors.map((color) => color.url)} /> */}
-          <div className="space-y-5 flex flex-col">
-            <span className="text-gray-400 uppercase text-xs">
+          <div className="space-y-5 flex flex-col ">
+            <span className="text-gray-400 uppercase text-xs pl-4 lg:pl-0">
               Colores disponibles
             </span>
-            <div className="flex lg:w-full overflow-x-auto lg:overflow-x-hidden gap-2">
+            <div className="flex lg:w-full overflow-x-auto lg:overflow-x-hidden gap-2 pl-4 lg:pl-0">
               {colors.map((color) => (
                 <button
                   key={color.name}
@@ -200,11 +200,11 @@ export default function ProductView() {
             </div>
             <div className="flex justify-center my-4">
               {selectedColor && (
-                <div className="w-[800px] h-[400px] overflow-hidden relative">
+                <div className="lg:w-[800px] lg:h-[400px] mb-10">
                   <img
                     src={selectedColor}
                     alt="Imagen del producto"
-                    className="object-contain w-full h-full mt-10"
+                    className="object-contain w-full h-full mt-10 "
                   />
                 </div>
               )}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import PropTypes from "prop-types";
 
-export default function SearchBar() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function SearchBar({ isOpen, setIsOpen }) {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
@@ -161,3 +161,8 @@ export default function SearchBar() {
     </>
   );
 }
+
+SearchBar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+};

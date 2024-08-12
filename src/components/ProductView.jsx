@@ -89,7 +89,7 @@ export default function ProductView() {
 
   return (
     <>
-      <img src={product.acf.portada} className="mb-10" />
+      <img src={product.acf.portada} className="mb-10 w-screen" />
       <div className="text-white py-10 max-w-6xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
         <div
           className="flex flex-col gap-4 w-full lg:w-1/3"

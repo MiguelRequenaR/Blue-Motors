@@ -89,6 +89,7 @@ export default function ProductView() {
 
   return (
     <>
+      <img src={product.acf.portada} className="mb-10" />
       <div className="text-white py-10 max-w-6xl pt-20 mx-auto overflow-hidden flex lg:flex-row gap-16 flex-col-reverse">
         <div
           className="flex flex-col gap-4 w-full lg:w-1/3"
@@ -256,12 +257,6 @@ export default function ProductView() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center items-center">
-        <img
-          src={product.acf.portada}
-          className="w-3/4 mb-10 rounded-lg object-fit"
-        />
       </div>
     </>
   );

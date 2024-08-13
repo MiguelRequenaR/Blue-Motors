@@ -67,55 +67,68 @@ export default function NavBar({ isOpen, setIsOpen }) {
   return (
     <div className="navbar bg-bg px-3 lg:px-10">
       <div className="navbar-start flex lg:justify-start justify-between">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <Bars2Icon className="h-6 w-6" />
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-black z-50 mt-3 w-[40dvh] p-2 shadow space-y-3"
-          >
-            <li className="duration-300 ease-in-out">
+        <details className="dropdown">
+          <summary className="btn m-1 btn-ghost lg:hidden">
+          <svg
+                className="swap-off fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 512 512">
+                <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+              </svg>
+          </summary>
+          <ul className="w-[97vw] *:*:py-5 menu  dropdown-content backdrop-blur-sm bg-black/65  z-50 mt-2 p-2 shadow space-y-5 -left-3">
+          <li className="duration-300 ease-in-out ">
               <a href="/">Inicio</a>
             </li>
-
             <li className="duration-300 ease-in-out">
               <a href="/motos">Tienda</a>
             </li>
             <hr className="my-4" />
-            <span className="block text-xs pl-3   text-slate-700">Marcas</span>
-            {marcas.map((marca) => (
-              <li key={marca.id} className="duration-300 ease-in-out">
-                <a href={`/motos/${marca.name}`}>{marca.name}</a>
-              </li>
-            ))}
-            {Object.keys(top10ProductsByBrand).map((brand) => (
-              <div key={brand}>
-                <h2>{brand}</h2>
-                <ul>
-                  {top10ProductsByBrand[brand].map((product, index) => (
-                    <li key={index}>{product.acf.modelo}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <span className="block text-xs pl-3 text-center">Marcas</span>
+            
+            {Object.keys(productsByBrand).map((brand) => (
+                  <details
+                    className="collapse flex justify-start flex-col 
+                      "
+                    key={brand}
+                  >
+                    
+                    <summary className="hover:bg-white/10 collapse-title font-black"><n>{brand}</n></summary>
+                    <li className=" collapse-content flex flex-col duration-300 ease-in-out">
+                    {productsByBrand[brand].map((item, index) => (
+                        <a
+                        href={`/moto/${item.id}`}
+                        className="py-6 w-full relative hover:text-primary
+                            after:content-[''] after:bg-primary after:h-[0%] after:w-[3px] after:bottom-0 after:-left-[20px] after:rounded-x1 after:absolute after:duration-300
+                            after:hover:h-[100%]"
+                        key={index}
+                      >
+                        {item.acf.modelo}
+                      </a>
+                    ))}
+                    </li>
+                  </details>
+                ))}
           </ul>
-        </div>
+        </details>
+        
         <a href="/">
           <img src={logo} alt="logo" className="w-24 h-10 sm:w-32 sm:h-14" />
         </a>
       </div>
 
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-5">
-          <li className="duration-300 ease-in-out">
+        <ul className="flex justify-center items-end menu menu-horizontal px-1 space-x-5">
+          <li className=" duration-300 ease-in-out">
             <a href="/">Inicio</a>
           </li>
 
           <li className="duration-300 ease-in-out">
             <a href="/motos">Tienda</a>
           </li>
-          <div className="dropdown  !static">
+          <li className="dropdown  !static">
             <li tabIndex={0} className="mt-2 " role="button">
               Marcas
             </li>
@@ -152,7 +165,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
                   </div>
                 ))}
             </div>
-          </div>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">

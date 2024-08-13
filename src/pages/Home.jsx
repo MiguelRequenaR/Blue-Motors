@@ -36,7 +36,7 @@ export default function Home({ setIsOpen }) {
           <div>
             <button
               onClick={() => setIsOpen(true)}
-              className="animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90"
+              className="hover:bg-primary transition duration-300 ease-in-out animate__animated animate__fadeInLeft bg-bg rounded-xl py-4 px-8 text-white text-center text-[20px] hover:opacity-90"
             >
               <p>
                 Buscar una moto

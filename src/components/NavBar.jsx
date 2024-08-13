@@ -88,7 +88,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
             <hr className="my-4" />
             <span className="block text-xs pl-3 text-center">Marcas</span>
             
-            {Object.keys(productsByBrand).map((brand) => (
+            { !isLoading && Object.keys(productsByBrand).map((brand) => (
                   <details
                     className="collapse flex justify-start flex-col 
                       "
@@ -129,13 +129,13 @@ export default function NavBar({ isOpen, setIsOpen }) {
             <a href="/motos">Tienda</a>
           </li>
           <li className="dropdown  !static">
-            <li tabIndex={0} className="mt-2 " role="button">
+            <li tabIndex={0} className="mt-2 " >
               Marcas
             </li>
 
             <div
               className=" dropdown-content widthScroll  z-50  start-auto
-                  backdrop-blur-md bg-transparent flex justify-center w-screen absolute  top-20 -right-[0px] border-gray-200 :py-[15px]:pl-[20px] "
+                  backdrop-blur-md bg-transparent flex items-start justify-center w-screen absolute  top-20 -right-[0px] border-gray-200 :py-[15px]:pl-[20px] "
             >
               {isLoading && (
                 <div className="absolute -top-4 right-0 z-50 w-screen h-20 bg-black/50 flex justify-center items-center">

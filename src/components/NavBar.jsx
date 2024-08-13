@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.jpeg";
 import SearchBar from "./SearchBar";
 import PropTypes from "prop-types";
-import { ArrowPathIcon, Bars2Icon } from "@heroicons/react/20/solid";
-import Loading from "./Loading";
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function NavBar({ isOpen, setIsOpen }) {
   const [marcas, setMarcas] = useState([]);
@@ -95,7 +94,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
                     key={brand}
                   >
                     
-                    <summary className="hover:bg-white/10 collapse-title font-black"><n>{brand}</n></summary>
+                    <summary className="hover:bg-white/10 collapse-title font-black"><p>{brand}</p></summary>
                     <li className=" collapse-content flex flex-col duration-300 ease-in-out">
                     {productsByBrand[brand].map((item, index) => (
                         <a
@@ -129,9 +128,9 @@ export default function NavBar({ isOpen, setIsOpen }) {
             <a href="/motos">Tienda</a>
           </li>
           <li className="dropdown  !static">
-            <li tabIndex={0} className="mt-2 " >
+            <div tabIndex={0} className="mt-2 " >
               Marcas
-            </li>
+            </div>
 
             <div
               className=" dropdown-content widthScroll  z-50  start-auto

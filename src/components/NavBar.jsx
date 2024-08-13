@@ -26,7 +26,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "http://bluemotorsec.com/wp-json/wp/v2/motos?_fields=id,acf&acf_format=standard"
+        "https://bluemotorsec.com/wp-json/wp/v2/motos?_fields=id,acf&acf_format=standard"
       );
       const data = await response.json();
       setProducts(data);

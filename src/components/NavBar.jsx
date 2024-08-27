@@ -24,6 +24,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
 
   const fetchProductsByBrand = async (brandId) => {
     try {
+      //TODO: El error esta en la URL planteada, no devuelve los datos que debería, solo renderiza los datos de la primera marca por mas que se le cambie el brandId
       const response = await fetch(
         `${
           import.meta.env.VITE_API_URL
@@ -57,8 +58,6 @@ export default function NavBar({ isOpen, setIsOpen }) {
       fetchAllProductsByBrand();
     }
   }, [marcas]);
-
-  console.log(productsByBrand);
 
   return (
     <div className="navbar bg-bg px-3 lg:px-10">
@@ -134,10 +133,10 @@ export default function NavBar({ isOpen, setIsOpen }) {
 
             <div
               className=" dropdown-content widthScroll  z-50  start-auto
-                  backdrop-blur-md bg-transparent grid grid-flow-row grid-cols-5  w-screen absolute  top-20 -right-0 border-gray-200 py-10 "
+                  backdrop-blur-md bg-transparent justify-between grid grid-flow-row grid-cols-5  w-screen absolute  top-20 -right-0 border-gray-200 py-10 "
             >
               {isLoading && (
-                <div className="absolute space-x-2  -top-4 right-0 z-50 w-screen h-20 bg-black/50 flex justify-center items-center">
+                <div className="absolute space-x-2   right-0 z-50 w-screen h-24 bg-black/50 flex justify-center items-center">
                   <ArrowPathIcon className="w-4 h-4 animate-spin" />
                   <span> Cargando Marcas...</span>
                 </div>
@@ -145,20 +144,18 @@ export default function NavBar({ isOpen, setIsOpen }) {
               {!isLoading &&
                 Object.keys(productsByBrand).map((brand) => (
                   <div
-                    className="flex justify-start items-start flex-col space-y-3 mt-[20px] p-4 gap-y-[20px]
+                    className=" space-y-3 mt-5 p-4 gap-y-5
                       "
                     key={brand}
                   >
-                    <h2 className=" font-bold ">{brand}</h2>
-                    <ul className="flex flex-col  space-y-1 mt-[20px] py-4 gap-y-[20px]">
+                    <h2 className=" font-bold  text-left">{brand}</h2>
+                    <ul className=" mt-5 py-2  text-left">
                       {productsByBrand[brand].map((item, index) => (
-                        <a
-                          href={`/moto/${item.id}`}
-                          className="text-xs"
-                          key={index}
-                        >
-                          {item.acf.modelo}
-                        </a>
+                        <li key={index}>
+                          <a href={`/moto/${item.id}`} className="text-xs">
+                            {item.acf.modelo}
+                          </a>
+                        </li>
                       ))}
                     </ul>
                   </div>

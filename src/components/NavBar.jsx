@@ -7,9 +7,9 @@ import { ArrowPathIcon } from "@heroicons/react/20/solid";
 export default function NavBar({ isOpen, setIsOpen }) {
   const [marcas, setMarcas] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [productsByBrand, setProductsByBrand] = useState({});
 
-  const fetchProducts = async () => {
+  const fetchMarcas = async () => {
     setIsLoading(true);
     try {
       const url = `${import.meta.env.VITE_API_URL}/marcas?acf_format=standard`;
@@ -22,46 +22,41 @@ export default function NavBar({ isOpen, setIsOpen }) {
     setIsLoading(false);
   };
 
-  const fetchData = async () => {
-    setIsLoading(true);
+  const fetchProductsByBrand = async (brandId) => {
     try {
       const response = await fetch(
-        "https://bluemotorsec.com/wp-json/wp/v2/motos?_fields=id,acf&acf_format=standard"
+        `${import.meta.env.VITE_API_URL}/motos?_fields=id,acf&acf_format=standard&per_page=5&marca=${brandId}`
       );
       const data = await response.json();
-      setProducts(data);
+      return data;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching products for brand:", error);
+      return [];
     }
+  };
+
+  const fetchAllProductsByBrand = async () => {
+    setIsLoading(true);
+    const productsByBrandTemp = {};
+    for (const marca of marcas) {
+      const products = await fetchProductsByBrand(marca.id);
+      productsByBrandTemp[marca.name] = products;
+    }
+    setProductsByBrand(productsByBrandTemp);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchMarcas();
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const productsByBrand = products.reduce((acc, item) => {
-    const brand = item.acf.marca.name;
-    if (!acc[brand]) {
-      acc[brand] = [];
+    if (marcas.length > 0) {
+      fetchAllProductsByBrand();
     }
-    acc[brand].push(item);
-    return acc;
-  }, {});
+  }, [marcas]);
 
-  const top10ProductsByBrand = Object.keys(productsByBrand).reduce(
-    (acc, brand) => {
-      acc[brand] = productsByBrand[brand]
-        .sort((a, b) => b.acf.someMetric - a.acf.someMetric) // Replace 'someMetric' with the actual metric to sort by
-        .slice(0, 10);
-      return acc;
-    },
-    {}
-  );
+
 
   return (
     <div className="navbar bg-bg px-3 lg:px-10">
@@ -134,7 +129,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
 
             <div
               className=" dropdown-content widthScroll  z-50  start-auto
-                  backdrop-blur-md bg-transparent flex items-start justify-center w-screen absolute  top-20 -right-[0px] border-gray-200 :py-[15px]:pl-[20px] "
+                  backdrop-blur-md bg-transparent flex items-start justify-center w-screen absolute  top-20 -right-[0px] border-gray-200 :py-[5px]:pl-[5px] "
             >
               {isLoading && (
                 <div className="absolute -top-4 right-0 z-50 w-screen h-20 bg-black/50 flex justify-center items-center">

@@ -12,10 +12,12 @@ export default function Products() {
 
   const fetchProducts = async (page) => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard&per_page=${productsPerPage}&page=${page}`;
+      const url = `${
+        import.meta.env.VITE_API_URL
+      }/motos?acf_format=standard&per_page=${productsPerPage}&page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
-      const total = response.headers.get('X-WP-Total'); 
+      const total = response.headers.get("X-WP-Total");
       setProducts(data);
       setTotalProducts(total);
       setIsLoading(false);
@@ -70,10 +72,10 @@ export default function Products() {
             />
           ))}
         </div>
-        <div className="flex justify-center items-center mt-10">
+        <div className="flex justify-center items-center mt-16 text-white">
           <div className="flex items-center gap-4">
             <button
-              className="btn btn-square"
+              className="btn btn-circle"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(currentPage - 1)}
             >
@@ -83,7 +85,7 @@ export default function Products() {
               Página {currentPage} de {totalPages}
             </button>
             <button
-              className="btn btn-square"
+              className="btn btn-circle"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
             >

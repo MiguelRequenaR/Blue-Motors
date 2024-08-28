@@ -5,61 +5,6 @@ import PropTypes from "prop-types";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function NavBar({ isOpen, setIsOpen }) {
-  // const [marcas, setMarcas] = useState([]);
-
-  // const [productsByBrand, setProductsByBrand] = useState({});
-
-  // const fetchMarcas = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const url = `${import.meta.env.VITE_API_URL}/marcas?acf_format=standard`;
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setMarcas(data);
-  //   } catch (error) {
-  //     console.log("Error fetching data: ", error);
-  //   }
-  //   setIsLoading(false);
-  // };
-
-  // const fetchProductsByBrand = async (brandId) => {
-  //   try {
-  //     //TODO: El error esta en la URL planteada, no devuelve los datos que debería, solo renderiza los datos de la primera marca por mas que se le cambie el brandId  
-  //     const response = await fetch(
-  //       `${
-  //         import.meta.env.VITE_API_URL
-  //       }/motos?marca=${brandId}`
-  //     );
-  //     const data = await response.json();
-  //     return data;
-  //   } catch (error) {
-  //     console.error("Error fetching products for brand:", error);
-  //     return [];
-  //   }
-  // };
-
-  // const fetchAllProductsByBrand = async () => {
-  //   setIsLoading(true);
-  //   const productsByBrandTemp = {};
-  //   for (const marca of marcas) {
-  //     const products = await fetchProductsByBrand(marca.id);
-  //     productsByBrandTemp[marca.name] = products;
-  //   }
-  //   setProductsByBrand(productsByBrandTemp);
-  //   setIsLoading(false);
-  //   console.log('hola :v', productsByBrandTemp[marcas[0].name]);
-  // };
-  
-
-  // useEffect(() => {
-  //   fetchMarcas();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (marcas.length > 0) {
-  //     fetchAllProductsByBrand();
-  //   }
-  // }, [marcas]);
 
   const [marcas, setMarcas] = useState([]);
   const [productosClasificados, setProductosClasificados] = useState({});

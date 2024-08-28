@@ -41,11 +41,16 @@ export default function NavBar({ isOpen, setIsOpen }) {
   const fetchAllProductsByBrand = async () => {
     setIsLoading(true);
     const productsByBrandTemp = {};
+
+    //TODO: La opcion de usar reduce queda invalidad porque la REST API no devuelve todos los items, solo los 10 primeros por tanto no se haria un buen reduce de marcas y modelos de las mismas.
+
     for (const marca of marcas) {
       const products = await fetchProductsByBrand(marca.id);
       productsByBrandTemp[marca.name] = products;
     }
+
     setProductsByBrand(productsByBrandTemp);
+    console.log(productsByBrandTemp);
     setIsLoading(false);
   };
 

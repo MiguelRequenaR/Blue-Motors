@@ -5,60 +5,135 @@ import PropTypes from "prop-types";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function NavBar({ isOpen, setIsOpen }) {
-  const [marcas, setMarcas] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [productsByBrand, setProductsByBrand] = useState({});
+  // const [marcas, setMarcas] = useState([]);
 
+  // const [productsByBrand, setProductsByBrand] = useState({});
+
+  // const fetchMarcas = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const url = `${import.meta.env.VITE_API_URL}/marcas?acf_format=standard`;
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     setMarcas(data);
+  //   } catch (error) {
+  //     console.log("Error fetching data: ", error);
+  //   }
+  //   setIsLoading(false);
+  // };
+
+  // const fetchProductsByBrand = async (brandId) => {
+  //   try {
+  //     //TODO: El error esta en la URL planteada, no devuelve los datos que debería, solo renderiza los datos de la primera marca por mas que se le cambie el brandId  
+  //     const response = await fetch(
+  //       `${
+  //         import.meta.env.VITE_API_URL
+  //       }/motos?marca=${brandId}`
+  //     );
+  //     const data = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Error fetching products for brand:", error);
+  //     return [];
+  //   }
+  // };
+
+  // const fetchAllProductsByBrand = async () => {
+  //   setIsLoading(true);
+  //   const productsByBrandTemp = {};
+  //   for (const marca of marcas) {
+  //     const products = await fetchProductsByBrand(marca.id);
+  //     productsByBrandTemp[marca.name] = products;
+  //   }
+  //   setProductsByBrand(productsByBrandTemp);
+  //   setIsLoading(false);
+  //   console.log('hola :v', productsByBrandTemp[marcas[0].name]);
+  // };
+  
+
+  // useEffect(() => {
+  //   fetchMarcas();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (marcas.length > 0) {
+  //     fetchAllProductsByBrand();
+  //   }
+  // }, [marcas]);
+
+  const [marcas, setMarcas] = useState([]);
+  const [productosClasificados, setProductosClasificados] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Función para obtener las marcas
   const fetchMarcas = async () => {
-    setIsLoading(true);
     try {
-      const url = `${import.meta.env.VITE_API_URL}/marcas?acf_format=standard`;
-      const response = await fetch(url);
+      const response = await fetch("https://bluemotorsec.com/wp-json/wp/v2/marcas/");
       const data = await response.json();
-      setMarcas(data);
+
+      const marcasArray = data.map((marca) => ({
+        id: marca.id,
+        name: marca.name,
+      }));
+
+      setMarcas(marcasArray);
     } catch (error) {
-      console.log("Error fetching data: ", error);
+      console.error("Error fetching marcas:", error);
     }
-    setIsLoading(false);
   };
 
-  const fetchProductsByBrand = async (brandId) => {
+  // Función para obtener productos por marca
+  const fetchProductosPorMarca = async (marcaId) => {
     try {
-      //TODO: El error esta en la URL planteada, no devuelve los datos que debería, solo renderiza los datos de la primera marca por mas que se le cambie el brandId
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_API_URL
-        }/motos?_fields=id,acf&acf_format=standard&per_page=5&marca=${brandId}`
-      );
+      const response = await fetch(`https://bluemotorsec.com/wp-json/wp/v2/motos?marcas=${marcaId}`);
       const data = await response.json();
-      return data;
+
+      const productos = data
+        .filter((producto) => producto.acf && producto.acf.modelo)
+        .map((producto) => ({
+          id: producto.id,
+          modelo: producto.acf.modelo,
+        }));
+
+      return productos;
     } catch (error) {
-      console.error("Error fetching products for brand:", error);
+      console.error(`Error fetching productos for marca ${marcaId}:`, error);
       return [];
     }
   };
 
-  const fetchAllProductsByBrand = async () => {
-    setIsLoading(true);
-    const productsByBrandTemp = {};
-    for (const marca of marcas) {
-      const products = await fetchProductsByBrand(marca.id);
-      productsByBrandTemp[marca.name] = products;
+  // Función para clasificar los productos por marca y actualizar el estado
+  const clasificarProductosPorMarca = async () => {
+    try {
+      for (const marca of marcas) {
+        const productos = await fetchProductosPorMarca(marca.id);
+
+        if (productos.length > 0) {
+          // Usamos la función de actualización de estado para evitar sobrescritura
+          setProductosClasificados((prevState) => ({
+            ...prevState,
+            [marca.name]: productos,
+          }));
+        }
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error clasificando productos:", error);
     }
-    setProductsByBrand(productsByBrandTemp);
-    setIsLoading(false);
   };
 
+  // useEffect para obtener las marcas al montar el componente
   useEffect(() => {
     fetchMarcas();
   }, []);
 
+  // useEffect para clasificar productos cuando las marcas están disponibles
   useEffect(() => {
     if (marcas.length > 0) {
-      fetchAllProductsByBrand();
+      clasificarProductosPorMarca();
     }
   }, [marcas]);
-
   return (
     <div className="navbar bg-bg px-3 lg:px-10">
       <div className="navbar-start flex lg:justify-start justify-between">
@@ -85,30 +160,32 @@ export default function NavBar({ isOpen, setIsOpen }) {
             <span className="block text-xs pl-3 text-center">Marcas</span>
 
             {!isLoading &&
-              Object.keys(productsByBrand).map((brand) => (
-                <details
-                  className="collapse flex justify-start flex-col
-                      "
-                  key={brand}
-                >
-                  <summary className="hover:bg-white/10 collapse-title font-black">
-                    <p>{brand}</p>
-                  </summary>
-                  <li className=" collapse-content flex flex-col duration-300 ease-in-out">
-                    {productsByBrand[brand].map((item, index) => (
-                      <a
-                        href={`/moto/${item.id}`}
-                        className="py-6 w-full relative hover:text-primary
+        Object.keys(productosClasificados).map((brand) => (
+          <details
+            className="collapse flex justify-start flex-col"
+            key={brand}
+          >
+            <summary className="hover:bg-white/10 collapse-title font-black">
+              <p>{brand}</p>
+            </summary>
+            <ul className="collapse-content flex flex-col duration-300 ease-in-out">
+              {productosClasificados[brand].map((item, index) => (
+                <li key={index}>
+                  <a
+                    href={`/moto/${item.id}`}
+                    className="py-6 w-full relative hover:text-primary
                             after:content-[''] after:bg-primary after:h-[0%] after:w-[3px] after:bottom-0 after:-left-[20px] after:rounded-x1 after:absolute after:duration-300
                             after:hover:h-[100%]"
-                        key={index}
-                      >
-                        {item.acf.modelo}
-                      </a>
-                    ))}
-                  </li>
-                </details>
+                  >
+                    
+                    {item.modelo || 'Modelo no disponible'}
+                  </a>
+                  
+                </li>
               ))}
+            </ul>
+          </details>
+        ))}
           </ul>
         </details>
 
@@ -132,7 +209,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
             </div>
 
             <div
-              className=" dropdown-content widthScroll  z-50  start-auto
+              className="flex items-start dropdown-content widthScroll  z-50  start-auto
                   backdrop-blur-md bg-transparent justify-between grid grid-flow-row grid-cols-5  w-screen absolute  top-20 -right-0 border-gray-200 py-10 "
             >
               {isLoading && (
@@ -142,18 +219,17 @@ export default function NavBar({ isOpen, setIsOpen }) {
                 </div>
               )}
               {!isLoading &&
-                Object.keys(productsByBrand).map((brand) => (
+                Object.keys(productosClasificados).map((brand) => (
                   <div
-                    className=" space-y-3 mt-5 p-4 gap-y-5
-                      "
+                    className="space-y-3 mt-5 p-4 gap-y-5 flex flex-col "
                     key={brand}
                   >
-                    <h2 className=" font-bold  text-left">{brand}</h2>
-                    <ul className=" mt-5 py-2  text-left">
-                      {productsByBrand[brand].map((item, index) => (
+                    <h2 className="font-bold text-left">{brand}</h2>
+                    <ul className="mt-5 py-2 text-left">
+                      {productosClasificados[brand].map((item, index) => (
                         <li key={index}>
                           <a href={`/moto/${item.id}`} className="text-xs">
-                            {item.acf.modelo}
+                          {item.modelo || 'Modelo no disponible'}
                           </a>
                         </li>
                       ))}

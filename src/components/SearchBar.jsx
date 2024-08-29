@@ -44,8 +44,11 @@ export default function SearchBar({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)} className=" btn glass">
-        Buscar una moto ...
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className=" btn lg:glass btn-ghost"
+      >
+        <span className="hidden lg:block">Buscar una moto ...</span>
         <MagnifyingGlassIcon className="h-6 w-6" />
       </button>
 
@@ -55,7 +58,7 @@ export default function SearchBar({ isOpen, setIsOpen }) {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Escribe aquí para buscar ..."
+                placeholder="Escribe aquí ..."
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-transparent border-b border-white text-white lg:text-xl py-2 pr-10 pl-4 focus:outline-none"
                 onKeyDown={(event) => {
@@ -68,8 +71,8 @@ export default function SearchBar({ isOpen, setIsOpen }) {
                 onClick={handleSearch}
                 className="absolute btn right-0  transform -translate-y-1/2 text-white"
               >
-                Buscar
-                <PaperAirplaneIcon className="h-6 w-6" />
+                <span className="hidden lg:block">Buscar</span>
+                <PaperAirplaneIcon className="lg:h-6 lg:w-6 w-4 h-4" />
               </button>
             </div>
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.jpeg";
 import SearchBar from "./SearchBar";
 import PropTypes from "prop-types";
-import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import { ArrowPathIcon, Bars2Icon } from "@heroicons/react/20/solid";
 
 export default function NavBar({ isOpen, setIsOpen }) {
   const [marcas, setMarcas] = useState([]);
@@ -84,18 +84,10 @@ export default function NavBar({ isOpen, setIsOpen }) {
   }, [marcas]);
   return (
     <div className="navbar bg-bg px-3 lg:px-10">
-      <div className="navbar-start flex lg:justify-start justify-between">
+      <div className="navbar-start flex lg:justify-start justify-between w-full">
         <details className="dropdown">
-          <summary className="btn m-1 btn-ghost lg:hidden">
-            <svg
-              className="swap-off fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 512 512"
-            >
-              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
-            </svg>
+          <summary className="btn m-1  btn-ghost lg:hidden">
+            <Bars2Icon className="h-6 w-6 " />
           </summary>
           <ul className="w-[97vw] *:*:py-5 menu  dropdown-content backdrop-blur-sm bg-black/65  z-50 mt-2 p-2 shadow space-y-5 -left-3">
             <li className="duration-300 ease-in-out ">

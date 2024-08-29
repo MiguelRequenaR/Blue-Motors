@@ -9,7 +9,7 @@ export default function Footer() {
         data-aos-delay="300"
         data-aos-duration="500"
       >
-        <div className="bg-primary p-10 rounded-lg">
+        <div className="bg-primary p-10 lg:rounded-lg">
           <h1 className="text-white font-bold text-2xl">Acerca de nosotros</h1>
           <p className="text-white text-base mt-5">
             Empresa lider en venta de motocicletas y motos de alta gama, con una

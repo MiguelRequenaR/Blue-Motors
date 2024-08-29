@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function NavBar({ isOpen, setIsOpen }) {
-
   const [marcas, setMarcas] = useState([]);
   const [productosClasificados, setProductosClasificados] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +12,9 @@ export default function NavBar({ isOpen, setIsOpen }) {
   // Función para obtener las marcas
   const fetchMarcas = async () => {
     try {
-      const response = await fetch("https://bluemotorsec.com/wp-json/wp/v2/marcas/");
+      const response = await fetch(
+        "https://bluemotorsec.com/wp-json/wp/v2/marcas/"
+      );
       const data = await response.json();
 
       const marcasArray = data.map((marca) => ({
@@ -30,7 +31,9 @@ export default function NavBar({ isOpen, setIsOpen }) {
   // Función para obtener productos por marca
   const fetchProductosPorMarca = async (marcaId) => {
     try {
-      const response = await fetch(`https://bluemotorsec.com/wp-json/wp/v2/motos?marcas=${marcaId}`);
+      const response = await fetch(
+        `https://bluemotorsec.com/wp-json/wp/v2/motos?marcas=${marcaId}`
+      );
       const data = await response.json();
 
       const productos = data
@@ -105,32 +108,30 @@ export default function NavBar({ isOpen, setIsOpen }) {
             <span className="block text-xs pl-3 text-center">Marcas</span>
 
             {!isLoading &&
-        Object.keys(productosClasificados).map((brand) => (
-          <details
-            className="collapse flex justify-start flex-col"
-            key={brand}
-          >
-            <summary className="hover:bg-white/10 collapse-title font-black">
-              <p>{brand}</p>
-            </summary>
-            <ul className="collapse-content flex flex-col duration-300 ease-in-out">
-              {productosClasificados[brand].map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={`/moto/${item.id}`}
-                    className="py-6 w-full relative hover:text-primary
+              Object.keys(productosClasificados).map((brand) => (
+                <details
+                  className="collapse flex justify-start flex-col"
+                  key={brand}
+                >
+                  <summary className="hover:bg-white/10 collapse-title font-black">
+                    <p>{brand}</p>
+                  </summary>
+                  <ul className="collapse-content flex flex-col duration-300 ease-in-out">
+                    {productosClasificados[brand].map((item, index) => (
+                      <li key={index}>
+                        <a
+                          href={`/moto/${item.id}`}
+                          className="py-6 w-full relative hover:text-primary
                             after:content-[''] after:bg-primary after:h-[0%] after:w-[3px] after:bottom-0 after:-left-[20px] after:rounded-x1 after:absolute after:duration-300
                             after:hover:h-[100%]"
-                  >
-                    
-                    {item.modelo || 'Modelo no disponible'}
-                  </a>
-                  
-                </li>
+                        >
+                          {item.modelo || "Modelo no disponible"}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
               ))}
-            </ul>
-          </details>
-        ))}
           </ul>
         </details>
 
@@ -154,11 +155,11 @@ export default function NavBar({ isOpen, setIsOpen }) {
             </div>
 
             <div
-              className="flex items-start dropdown-content widthScroll  z-50  start-auto
+              className=" items-start dropdown-content widthScroll  z-50  start-auto
                   backdrop-blur-md bg-transparent justify-between grid grid-flow-row grid-cols-5  w-screen absolute  top-20 -right-0 border-gray-200 py-10 "
             >
               {isLoading && (
-                <div className="absolute space-x-2   right-0 z-50 w-screen h-24 bg-black/50 flex justify-center items-center">
+                <div className="absolute space-x-2 -top-1  right-0 z-50 w-screen h-36 bg-black/50 flex justify-center items-center">
                   <ArrowPathIcon className="w-4 h-4 animate-spin" />
                   <span> Cargando Marcas...</span>
                 </div>
@@ -174,7 +175,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
                       {productosClasificados[brand].map((item, index) => (
                         <li key={index}>
                           <a href={`/moto/${item.id}`} className="text-xs">
-                          {item.modelo || 'Modelo no disponible'}
+                            {item.modelo || "Modelo no disponible"}
                           </a>
                         </li>
                       ))}

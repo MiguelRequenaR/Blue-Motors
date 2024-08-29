@@ -1,14 +1,39 @@
 import PropTypes from "prop-types";
 import "animate.css";
-import { useRef } from "react";
-export default function Carousel({ images }) {
+import { useEffect, useRef, useState } from "react";
+export default function Carousel({ images, id }) {
+  const [imagesGallery, setImagesGallery] = useState([]);
+  async function fetchProduct() {
+    try {
+      const productUrl = `${
+        import.meta.env.VITE_API_URL
+      }/motos/${id}?acf_format=standard`;
+      const response = await fetch(productUrl);
+      const data = await response.json();
+      const imageUrls = [];
+      for (let i = 1; i <= 9; i++) {
+        const key = `imagen_galeria_${i}`;
+        if (data.acf[key] && data.acf[key].startsWith("http")) {
+          imageUrls.push(data.acf[key]);
+        }
+      }
+      setImagesGallery(imageUrls);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+  useEffect(() => {
+    if (id) {
+      fetchProduct();
+    }
+  }, [id]);
   const carouselRef = useRef([]);
   const handleNavigation = (index) => {
     carouselRef.current[index].scrollIntoView({ behavior: "smooth" });
   };
   return (
     <div className="carousel w-full animate__animated animate__fadeInUp">
-      {images.map((image, index) => (
+      {imagesGallery.map((image, index) => (
         <div
           key={index}
           ref={(el) => (carouselRef.current[index] = el)}
@@ -46,4 +71,5 @@ export default function Carousel({ images }) {
 
 Carousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
 };

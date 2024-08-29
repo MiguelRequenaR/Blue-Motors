@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import {
+  CheckCircleIcon,
+  MagnifyingGlassIcon,
+  PaperAirplaneIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid";
 import PropTypes from "prop-types";
 
 export default function SearchBar({ isOpen, setIsOpen }) {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async () => {
@@ -15,9 +19,6 @@ export default function SearchBar({ isOpen, setIsOpen }) {
         const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
         const response = await fetch(url);
         const data = await response.json();
-
-        setAllProducts(data);
-
         const filterResult = data.filter((producto) =>
           producto.acf.modelo.toLowerCase().includes(search.toLowerCase())
         );
@@ -43,24 +44,9 @@ export default function SearchBar({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="text-white hover:text-primary"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          ></path>
-        </svg>
+      <button onClick={() => setIsOpen(!isOpen)} className=" btn glass">
+        Buscar una moto ...
+        <MagnifyingGlassIcon className="h-6 w-6" />
       </button>
 
       {isOpen && (
@@ -69,7 +55,7 @@ export default function SearchBar({ isOpen, setIsOpen }) {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Buscar un modelo ..."
+                placeholder="Escribe aquí para buscar ..."
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-transparent border-b border-white text-white lg:text-xl py-2 pr-10 pl-4 focus:outline-none"
                 onKeyDown={(event) => {
@@ -80,22 +66,10 @@ export default function SearchBar({ isOpen, setIsOpen }) {
               />
               <button
                 onClick={handleSearch}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white"
+                className="absolute btn right-0  transform -translate-y-1/2 text-white"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                Buscar
+                <PaperAirplaneIcon className="h-6 w-6" />
               </button>
             </div>
 
@@ -152,7 +126,7 @@ export default function SearchBar({ isOpen, setIsOpen }) {
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-4 right-4 font-bold text-white text-xl"
+            className="absolute top-4 right-4 font-bold text-white text-xl btn btn-ghost"
           >
             <XMarkIcon className="h-6 w-6" />
           </button>

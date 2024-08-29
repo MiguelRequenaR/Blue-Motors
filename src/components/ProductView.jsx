@@ -52,8 +52,6 @@ export default function ProductView() {
       const data = await response.json();
       setProduct(data);
       setIsLoading(false);
-
-      // Set the default selected color to the first available color, if any
       const availableColors = getAvailableColors(data.acf);
       if (availableColors.length > 0) {
         setSelectedColor(availableColors[0].url);
@@ -99,7 +97,7 @@ export default function ProductView() {
         >
           <div>
             {product.acf && (
-              <div className="space-y-3 gap-2 text-sm mb-4 p-6 bg-light-bg border-t-4 border-b-4 border-border">
+              <div className="space-y-3 gap-2 text-sm mb-4 py-6 px-2 bg-light-bg border-t-4 border-b-4 border-border">
                 <div className="flex justify-between">
                   <span className="text-gray-400 uppercase text-xs">
                     Marca:
@@ -251,7 +249,10 @@ export default function ProductView() {
                 />
               )}
               {activeTab === "2" && product.acf && (
-                <Carousel images={colors.map((color) => color.url)} />
+                <Carousel
+                  images={colors.map((color) => color.url)}
+                  id={product.id}
+                />
               )}
               {activeTab === "3" && <ContactForm />}
             </div>

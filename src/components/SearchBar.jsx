@@ -16,7 +16,7 @@ export default function SearchBar({ isOpen, setIsOpen }) {
     if (search.trim() !== "") {
       setIsLoading(true);
       try {
-        const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
+        const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard&per_page=100`;
         const response = await fetch(url);
         const data = await response.json();
         const filterResult = data.filter((producto) =>

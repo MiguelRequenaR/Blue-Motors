@@ -9,7 +9,7 @@ export default function ProductsFiltered() {
   const [isLoading, setIsLoading] = useState(true);
   const fetchProducts = async () => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/motos?acf_format=standard`;
+      const url = `https://bluemotorsec.com/wp-json/wp/v2/motos?acf_format=standard`;
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);

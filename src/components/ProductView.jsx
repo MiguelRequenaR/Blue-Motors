@@ -2,7 +2,6 @@ import { PhoneIcon, ShareIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
-import HeroImage from "./../assets/portada.jpg";
 
 import Carousel from "./product/Carousel";
 import ContactForm from "./product/ContactForm";
@@ -45,9 +44,7 @@ export default function ProductView() {
 
   async function fetchProduct() {
     try {
-      const productUrl = `${
-        import.meta.env.VITE_API_URL
-      }/motos/${id}?acf_format=standard`;
+      const productUrl = `https://bluemotorsec.com/wp-json/wp/v2/motos/${id}?acf_format=standard`;
       const response = await fetch(productUrl);
       const data = await response.json();
       setProduct(data);

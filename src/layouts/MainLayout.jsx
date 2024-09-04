@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default function MainLayout({ children, isOpen, setIsOpen }) {
   return (
-    <div>
+    <div className="mt-10">
       <NavBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <main>{children}</main>
     </div>

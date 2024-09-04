@@ -5,9 +5,7 @@ export default function Carousel({ images, id }) {
   const [imagesGallery, setImagesGallery] = useState([]);
   async function fetchProduct() {
     try {
-      const productUrl = `${
-        import.meta.env.VITE_API_URL
-      }/motos/${id}?acf_format=standard`;
+      const productUrl = `https://bluemotorsec.com/wp-json/wp/v2/motos/${id}?acf_format=standard`;
       const response = await fetch(productUrl);
       const data = await response.json();
       const imageUrls = [];

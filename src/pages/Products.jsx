@@ -12,9 +12,7 @@ export default function Products() {
 
   const fetchProducts = async (page) => {
     try {
-      const url = `${
-        import.meta.env.VITE_API_URL
-      }/motos?acf_format=standard&per_page=${productsPerPage}&page=${page}`;
+      const url = `https://bluemotorsec.com/wp-json/wp/v2/motos?acf_format=standard&per_page=${productsPerPage}&page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
       const total = response.headers.get("X-WP-Total");

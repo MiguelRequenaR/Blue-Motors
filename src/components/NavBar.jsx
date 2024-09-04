@@ -135,7 +135,7 @@ export default function NavBar({ isOpen, setIsOpen }) {
       <div className="navbar-center hidden lg:flex text-white">
         <ul className="flex justify-center items-end menu menu-horizontal px-1 space-x-5">
           <li className=" duration-300 ease-in-out">
-            <a href="/">Inicio</a>
+            <a href="https://bluemotorsec.com/">Inicio</a>
           </li>
 
           <li className="duration-300 ease-in-out">

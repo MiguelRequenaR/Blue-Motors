@@ -19,7 +19,7 @@ export default function App() {
   }, []);
 
   return (
-    <Router basename="/tienda">
+    <Router>
       <MainLayout isOpen={isOpen} setIsOpen={setIsOpen}>
         <Routes>
           <Route
